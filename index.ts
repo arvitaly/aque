@@ -37,6 +37,13 @@ export class Aque<P extends { [index: string]: any }, R extends { [index: string
             });
         });
     }
+    public async createIfNotExists<N extends keyof P>(name: N, params: P[N]): Promise<boolean> {
+        if (await this.has(name, params)) {
+            return false;
+        }
+        await this.create(name, params);
+        return true;
+    }
     public async has<N extends keyof P>(taskType: N, params: P[N]) {
         const isFind = await this.hasNotFailed(taskType, params);
         if (isFind) {

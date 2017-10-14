@@ -53,6 +53,15 @@ class Aque {
             });
         });
     }
+    createIfNotExists(name, params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (yield this.has(name, params)) {
+                return false;
+            }
+            yield this.create(name, params);
+            return true;
+        });
+    }
     has(taskType, params) {
         return __awaiter(this, void 0, void 0, function* () {
             const isFind = yield this.hasNotFailed(taskType, params);
